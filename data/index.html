@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP32 Web Server</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <h1>ESP32 Web Server</h1>
+  <p>Muhammad Daffa Aryasetya (2106705751)</p>
+  <p id="ledState">GPIO state: <strong>%STATE%</strong></p>
+  <label class="switch">
+    <input type="checkbox" id="ledToggle" onchange="toggleLED(this)">
+    <span class="slider"></span>
+  </label>
+  <script>
+    function toggleLED(checkbox) {
+      var state = checkbox.checked ? 'on' : 'off';
+      document.getElementById('ledState').innerHTML = 'GPIO state: <strong>' + state.toUpperCase() + '</strong>';
+      fetch('/' + state)
+        .then(response => response.text())
+        .catch(error => console.error('Error:', error));  
+    }
+  </script>
+</body>
+</html>
